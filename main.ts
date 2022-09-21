@@ -1,3 +1,13 @@
+/**
+* Fun with castles!
+* Build your castle walls and towers.
+* Functions are mapped to blocks using various macros
+* in comments starting with %. The most important macro
+* is "block", and it specifies that a block should be
+* generated for an **exported** function.
+*/
+
+//% color="#AA278D" weight=100
 namespace castles {
     function drawRectangle(length: number, width: number, blockType: number) {
         for (let index = 0; index < 2; index++) {
