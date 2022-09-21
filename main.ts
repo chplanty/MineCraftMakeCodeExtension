@@ -121,6 +121,27 @@ namespace castles {
         }
     }
 
+    /**
+     * Build a castle in the sky.
+     */
+
+    //% block="Build a castle in the sky."
+    export function buildCastleInTheSky() {
+        builder.teleportTo(player.position())
+        builder.face(getDirectionLeftOfPlayer())
+        builder.turn(RIGHT_TURN)
+
+        builder.shift(24, 20, 0)
+        shapes.circle(Block.Wool, builder.position(), 23, Axis.Y, ShapeOperation.Replace)
+        builder.shift(-13, 1, -13)
+
+        for (let index7 = 0; index7 < 4; index7++) {
+            buildCastleTower()
+            buildCastleWall()
+            builder.turn(LEFT_TURN)
+        }
+    }
+
     function getDirectionLeftOfPlayer(): CompassDirection {
         let playerOrientation = player.getOrientation(); // between -180 && 180
         if (playerOrientation >= -45 && playerOrientation < 45) {
