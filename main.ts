@@ -34,53 +34,80 @@ namespace castles {
         }
     }
 
-    //% block
-    export function buildCastleWall(width: number = 3, length: number = 13, height: number = 6) {
-        let BlocType = COBBLESTONE
+    /**
+     * Build a wall
+     */
+
+    //% block="build a $blockType wall of width $width, length $length and height = $height" 
+    //% width.defl=3
+    //% length.defl=27
+    //% height.defl=6
+    //% blockType.defl=Block.Cobblestone
+    export function buildCastleWall(width: number = 3, length: number = 27, height: number = 6, blockType: Block = Block.Cobblestone) {
         builder.place(CYAN_STAINED_GLASS)
-        // builder.teleportTo(pos(0, 0, 0))
-        // builder is at the center of the tower - shift it to a corner
         builder.shift(-Math.floor(width / 2), 0, -Math.floor(width / 2))
         // build 2 walls from bottom to top (up to WallHeight)
         for (let index4 = 0; index4 < height - 1; index4++) {
-            drawRectangle(length, width, BlocType)
+            drawRectangle(length, width, blockType)
             builder.move(UP, 1)
         }
-        drawAlternatingRectangle(length, width, BlocType)
+        drawAlternatingRectangle(length, width, blockType)
         // mov builder to center on other wall's end   ( added -1 as hotfix :/ )
         builder.shift(length - Math.floor(width / 2) - 1, 1 - height, Math.floor(width / 2))
         // verify it's ok
         builder.place(CYAN_WOOL)
     }
 
-    //% block
-    export function buildCastleTower(width: number = 5, height: number = 8) {
-        let BlockType = 0
+    /**
+     * Build a square tower
+     */
 
-        BlockType = COBBLESTONE
-        width = 5
-        height = 8
+    //% block="build a $blockType square tower of width = $width and height = $height"
+    //% width.defl=5
+    //% height.defl=8
+    //% blockType.defl=Block.Cobblestone
+    export function buildCastleTower(width: number = 5, height: number = 8, blockType: Block = Block.Cobblestone) {
         // builder.teleportTo(pos(0, 0, 0))
         // builder is at the center of the tower - shift it to a corner
         builder.shift( - Math.floor(width / 2), 0, - Math.floor(width / 2))
         // let posX = Math.sin(3.14159265*2)  // will need this for circular tower's base
         // build 4 walls from bottom to top (up to TowerHeight)
-        for (let height2 = 0; height2 <= height; height2++) {
+        for (let index = 0; index <= height; index++) {
             // add 4 walls
-            drawRectangle(width, width, BlockType);
+            drawRectangle(width, width, blockType);
             builder.move(UP, 1)
         }
         // build the upper part, larger by 1
         // shift in diagonal by 1 block
         builder.shift(-1, 0, -1)
-        for (let height22 = 0; height22 <= 2; height22++) {
+        for (let builderHeight = 0; builderHeight < 2; builderHeight++) {
             // add 4 walls
-            drawRectangle(width + 2, width + 2, BlockType)
+            drawRectangle(width + 2, width + 2, blockType)
             builder.move(UP, 1)
         }
+        
+        // put crenelation on the last level
+        drawAlternatingRectangle(width +2, width + 2, blockType)
+
         // mov builder back to center
-        builder.shift(Math.floor(width / 2) + 1, 0 - (height + 4), Math.floor(width / 2) + 1)
+        builder.shift(Math.floor(width / 2) + 1, 0 - (height + 3), Math.floor(width / 2) + 1)
         // verify it's ok
         builder.place(GLASS)
     }
+
+    /**
+     * Build a simple castle with four towers and four walls.
+     */
+
+    //% block="build a simple castle."
+    export function buildBasicCastle() {
+        for (let index = 0; index <4; index++) {
+            buildCastleWall();
+            buildCastleTower();
+            builder.turn(LEFT_TURN);
+        }
+    }
+
+    //% block
+    export function foo(blockType:Block){}
 }
