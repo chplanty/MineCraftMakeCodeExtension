@@ -35,44 +35,39 @@ namespace castles {
     }
 
     //% block
-    export function buildCastleWall() {
+    export function buildCastleWall(width: number = 3, length: number = 13, height: number = 6) {
         let BlocType = COBBLESTONE
-        let WallWidth = 3
-        let WallLenght = 13
-        let WallHeight = 6
         builder.place(CYAN_STAINED_GLASS)
         // builder.teleportTo(pos(0, 0, 0))
         // builder is at the center of the tower - shift it to a corner
-        builder.shift(-Math.floor(WallWidth / 2), 0, -Math.floor(WallWidth / 2))
+        builder.shift(-Math.floor(width / 2), 0, -Math.floor(width / 2))
         // build 2 walls from bottom to top (up to WallHeight)
-        for (let index4 = 0; index4 < WallHeight - 1; index4++) {
-            drawRectangle(WallLenght, WallWidth, BlocType)
+        for (let index4 = 0; index4 < height - 1; index4++) {
+            drawRectangle(length, width, BlocType)
             builder.move(UP, 1)
         }
-        drawAlternatingRectangle(WallLenght, WallWidth, BlocType)
+        drawAlternatingRectangle(length, width, BlocType)
         // mov builder to center on other wall's end   ( added -1 as hotfix :/ )
-        builder.shift(WallLenght - Math.floor(WallWidth / 2) - 1, 1 - WallHeight, Math.floor(WallWidth / 2))
+        builder.shift(length - Math.floor(width / 2) - 1, 1 - height, Math.floor(width / 2))
         // verify it's ok
         builder.place(CYAN_WOOL)
     }
 
     //% block
-    export function buildCastleTower() {
+    export function buildCastleTower(width: number = 5, height: number = 8) {
         let BlockType = 0
-        let TowerSize = 0
-        let TowerHeight = 0
 
         BlockType = COBBLESTONE
-        TowerSize = 5
-        TowerHeight = 8
+        width = 5
+        height = 8
         // builder.teleportTo(pos(0, 0, 0))
         // builder is at the center of the tower - shift it to a corner
-        builder.shift( - Math.floor(TowerSize / 2), 0, - Math.floor(TowerSize / 2))
+        builder.shift( - Math.floor(width / 2), 0, - Math.floor(width / 2))
         // let posX = Math.sin(3.14159265*2)  // will need this for circular tower's base
         // build 4 walls from bottom to top (up to TowerHeight)
-        for (let height2 = 0; height2 <= TowerHeight; height2++) {
+        for (let height2 = 0; height2 <= height; height2++) {
             // add 4 walls
-            drawRectangle(TowerSize, TowerSize, BlockType);
+            drawRectangle(width, width, BlockType);
             builder.move(UP, 1)
         }
         // build the upper part, larger by 1
@@ -80,11 +75,11 @@ namespace castles {
         builder.shift(-1, 0, -1)
         for (let height22 = 0; height22 <= 2; height22++) {
             // add 4 walls
-            drawRectangle(TowerSize + 2, TowerSize + 2, BlockType)
+            drawRectangle(width + 2, width + 2, BlockType)
             builder.move(UP, 1)
         }
         // mov builder back to center
-        builder.shift(Math.floor(TowerSize / 2) + 1, 0 - (TowerHeight + 4), Math.floor(TowerSize / 2) + 1)
+        builder.shift(Math.floor(width / 2) + 1, 0 - (height + 4), Math.floor(width / 2) + 1)
         // verify it's ok
         builder.place(GLASS)
     }
