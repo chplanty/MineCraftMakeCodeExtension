@@ -54,6 +54,7 @@ namespace castles {
     //% height.defl=6
     //% blockType.defl=Block.Cobblestone
     //% expandableArgumentMode="toggle"
+    //% blockType.fieldEditor="gridpicker"
     export function buildCastleWall(width: number = 3, length: number = 27, height: number = 6, blockType: Block = Block.Cobblestone) {
         builder.place(CYAN_STAINED_GLASS)
         builder.shift(-Math.floor(width / 2), 0, -Math.floor(width / 2))
@@ -78,6 +79,7 @@ namespace castles {
     //% height.defl=8
     //% blockType.defl=Block.Cobblestone
     //% expandableArgumentMode="toggle"
+    //% blockType.fieldEditor="gridpicker"
     export function buildCastleTower(width: number = 5, height: number = 8, blockType: Block = Block.Cobblestone) {
         // builder is at the center of the tower - shift it to a corner
         builder.shift(- Math.floor(width / 2), 0, - Math.floor(width / 2))
