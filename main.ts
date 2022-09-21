@@ -62,7 +62,7 @@ namespace castles {
      * Build a square tower
      */
 
-    //% block="build a $blockType square tower of width $width and height $height"
+    //% block="build a $blockType square tower of width = $width and height = $height"
     //% width.defl=5
     //% height.defl=8
     //% blockType.defl=Block.Cobblestone
@@ -107,4 +107,7 @@ namespace castles {
             builder.turn(LEFT_TURN);
         }
     }
+
+    //% block
+    export function foo(blockType:Block){}
 }
