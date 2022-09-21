@@ -48,11 +48,12 @@ namespace castles {
      * Build a wall
      */
 
-    //% block="build a $blockType wall of width $width length $length and height $height" 
+    //% block="build castle wall || made of $blockType width $width length $length height $height" 
     //% width.defl=3
     //% length.defl=27
     //% height.defl=6
     //% blockType.defl=Block.Cobblestone
+    //% expandableArgumentMode="toggle"
     export function buildCastleWall(width: number = 3, length: number = 27, height: number = 6, blockType: Block = Block.Cobblestone) {
         builder.place(CYAN_STAINED_GLASS)
         builder.shift(-Math.floor(width / 2), 0, -Math.floor(width / 2))
@@ -72,13 +73,14 @@ namespace castles {
      * Build a square tower
      */
 
-    //% block="build a $blockType square tower of width $width and height $height"
+    //% block="build castle tower || shape square made of $blockType width $width height $height"
     //% width.defl=5
     //% height.defl=8
     //% blockType.defl=Block.Cobblestone
+    //% expandableArgumentMode="toggle"
     export function buildCastleTower(width: number = 5, height: number = 8, blockType: Block = Block.Cobblestone) {
         // builder is at the center of the tower - shift it to a corner
-        builder.shift( - Math.floor(width / 2), 0, - Math.floor(width / 2))
+        builder.shift(- Math.floor(width / 2), 0, - Math.floor(width / 2))
         // build 4 walls from bottom to top (up to TowerHeight)
         for (let index = 0; index <= height; index++) {
             // add 4 walls
@@ -93,9 +95,9 @@ namespace castles {
             drawRectangle(width + 2, width + 2, blockType)
             builder.move(UP, 1)
         }
-        
+
         // put crenelation on the last level
-        drawAlternatingRectangle(width +2, width + 2, blockType)
+        drawAlternatingRectangle(width + 2, width + 2, blockType)
 
         // mov builder back to center
         builder.shift(Math.floor(width / 2) + 1, 0 - (height + 3), Math.floor(width / 2) + 1)
@@ -149,7 +151,7 @@ namespace castles {
      */
 
     //% block="Grow a bean stalk to reach a castle in the sky."
-    export function growBeanStalk(){
+    export function growBeanStalk() {
         blocks.fill(
             GREEN_WOOL,
             player.position(),
