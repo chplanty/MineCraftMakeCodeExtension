@@ -34,8 +34,15 @@ namespace castles {
         }
     }
 
-    //% block
-    export function buildCastleWall(width: number = 3, length: number = 13, height: number = 6) {
+    /**
+     * Build a wall with the parameterized width, length and height.
+     */
+
+    //% block="build wall width = $width length = $length height = $height"
+    //% width.defl=3
+    //% length.defl=27
+    //% height.defl=6
+    export function buildCastleWall(width: number = 3, length: number = 27, height: number = 6) {
         let BlocType = COBBLESTONE
         builder.place(CYAN_STAINED_GLASS)
         // builder.teleportTo(pos(0, 0, 0))
@@ -53,7 +60,13 @@ namespace castles {
         builder.place(CYAN_WOOL)
     }
 
-    //% block
+    /**
+     * Build a square tower with the parameterized width and height.
+     */
+
+    //% block="build tower width = $width height = $height"
+    //% width.defl=5
+    //% height.defl=8
     export function buildCastleTower(width: number = 5, height: number = 8) {
         let BlockType = 0
 
@@ -82,5 +95,18 @@ namespace castles {
         builder.shift(Math.floor(width / 2) + 1, 0 - (height + 4), Math.floor(width / 2) + 1)
         // verify it's ok
         builder.place(GLASS)
+    }
+
+    /**
+     * Build a simple castle with four towers and four walls.
+     */
+
+    //% block="build a simple castle."
+    export function buildBasicCastle() {
+        for (let index = 0; index <4; index++) {
+            buildCastleWall();
+            buildCastleTower();
+            builder.turn(LEFT_TURN);
+        }
     }
 }
