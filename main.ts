@@ -38,7 +38,7 @@ namespace castles {
      * Build a wall
      */
 
-    //% block="build a $blockType wall of width $width, length $length and height = $height" 
+    //% block="build a $blockType wall of width $width length $length and height $height" 
     //% width.defl=3
     //% length.defl=27
     //% height.defl=6
@@ -62,15 +62,13 @@ namespace castles {
      * Build a square tower
      */
 
-    //% block="build a $blockType square tower of width = $width and height = $height"
+    //% block="build a $blockType square tower of width $width and height $height"
     //% width.defl=5
     //% height.defl=8
     //% blockType.defl=Block.Cobblestone
     export function buildCastleTower(width: number = 5, height: number = 8, blockType: Block = Block.Cobblestone) {
-        // builder.teleportTo(pos(0, 0, 0))
         // builder is at the center of the tower - shift it to a corner
         builder.shift( - Math.floor(width / 2), 0, - Math.floor(width / 2))
-        // let posX = Math.sin(3.14159265*2)  // will need this for circular tower's base
         // build 4 walls from bottom to top (up to TowerHeight)
         for (let index = 0; index <= height; index++) {
             // add 4 walls
@@ -91,23 +89,42 @@ namespace castles {
 
         // mov builder back to center
         builder.shift(Math.floor(width / 2) + 1, 0 - (height + 3), Math.floor(width / 2) + 1)
-        // verify it's ok
-        builder.place(GLASS)
     }
 
     /**
-     * Build a simple castle with four towers and four walls.
+     * Build a simple castle with four towers and four walls around the player
      */
 
     //% block="build a simple castle."
     export function buildBasicCastle() {
-        for (let index = 0; index <4; index++) {
-            buildCastleWall();
-            buildCastleTower();
-            builder.turn(LEFT_TURN);
+        // move builder back to player position to allow repeat usage
+        builder.teleportTo(player.position())
+        // start off facing left of the player
+        builder.face(getDirectionLeftOfPlayer())
+        // shift away from player
+        builder.shift(-13, 0, -13)
+
+        for (let index = 0; index < 4; index++) {
+            buildCastleTower(5, 8)
+            buildCastleWall(3, 27, 6)
+            builder.turn(LEFT_TURN)
         }
     }
 
-    //% block
-    export function foo(blockType:Block){}
+    function getDirectionLeftOfPlayer(): CompassDirection {
+        let playerOrientation = player.getOrientation(); // between -180 && 180
+        if (playerOrientation >= -45 && playerOrientation < 45) {
+            return CompassDirection.East
+        }
+
+        if (playerOrientation >= 45 && playerOrientation < 135) {
+            return CompassDirection.South
+        }
+
+        if (playerOrientation >= -135 && playerOrientation < -45) {
+            return CompassDirection.West
+        }
+
+        return CompassDirection.North
+    }
 }
