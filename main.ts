@@ -107,8 +107,9 @@ namespace castles {
 
     //% block="build a simple castle."
     export function buildBasicCastle() {
+        let originalPlayerPosition = player.position()
         // move builder back to player position to allow repeat usage
-        builder.teleportTo(player.position())
+        builder.teleportTo(originalPlayerPosition)
         // start off facing left of the player
         builder.face(getDirectionLeftOfPlayer())
         // shift away from player
@@ -127,7 +128,8 @@ namespace castles {
 
     //% block="Build a castle in the sky."
     export function buildCastleInTheSky() {
-        builder.teleportTo(player.position())
+        let originalPlayerPosition = player.position()
+        builder.teleportTo(originalPlayerPosition)
         builder.face(getDirectionLeftOfPlayer())
         builder.turn(RIGHT_TURN)
 
@@ -140,6 +142,29 @@ namespace castles {
             buildCastleWall()
             builder.turn(LEFT_TURN)
         }
+    }
+
+    /**
+     * Grow a bean stalk to reach a castle in the sky.
+     */
+
+    //% block="Grow a bean stalk to reach a castle in the sky."
+    export function growBeanStalk(){
+        blocks.fill(
+            GREEN_WOOL,
+            player.position(),
+            pos(0, 20, 0),
+            FillOperation.Replace
+        )
+        blocks.fill(
+            LADDER,
+            player.position(),
+            positions.add(
+                player.position(),
+                pos(0, 40, 0)
+            ),
+            FillOperation.Keep
+        )
     }
 
     function getDirectionLeftOfPlayer(): CompassDirection {
