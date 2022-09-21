@@ -9,63 +9,59 @@
 
 //% color="#AA278D" weight=100
 namespace castles {
+    function drawRectangle(length: number, width: number, blockType: number) {
+        for (let index = 0; index < 2; index++) {
+            builder.mark()
+            builder.move(FORWARD, length - 1)
+            builder.tracePath(blockType)
+            builder.turn(LEFT_TURN)
+            builder.mark()
+            builder.move(FORWARD, width - 1)
+            builder.tracePath(blockType)
+            builder.turn(LEFT_TURN)
+        }
+    }
+
+    function drawAlternatingRectangle(length: number, width: number, blockType: number) {
+        function drawAlternatingLine(l: number, placeAtStart: boolean) {
+            let putBlock = placeAtStart;
+            for (let index = 0; index < l - 1; index++) {
+                builder.move(FORWARD, 1)
+                if (putBlock) {
+                    builder.place(blockType)
+                }
+                putBlock = !(putBlock)
+            }
+            return putBlock
+        }
+
+        builder.place(blockType)
+        for (let index = 0; index < 2; index++) {
+            let putBlock = drawAlternatingLine(length, false)
+            builder.turn(LEFT_TURN)
+            drawAlternatingLine(width, putBlock)
+            builder.turn(LEFT_TURN)
+        }
+    }
+
     //% block
     export function buildCastleWall() {
-        let BlocType = 0
-        let WallWidth = 0
-        let WallLenght = 0
-        let WallHeight = 0
-        let alternate = false
-        let putBlock = false
-        let TowerSize = 0
-        let TowerHeight = 0
-
-        BlocType = COBBLESTONE
-        WallWidth = 3
-        WallLenght = 13
-        WallHeight = 6
+        let BlocType = COBBLESTONE
+        let WallWidth = 3
+        let WallLenght = 13
+        let WallHeight = 6
         builder.place(CYAN_STAINED_GLASS)
         // builder.teleportTo(pos(0, 0, 0))
         // builder is at the center of the tower - shift it to a corner
-        builder.shift((0 - WallWidth) / 2 + 1, 0, (0 - WallWidth) / 2 + 1)
+        builder.shift(-Math.floor(WallWidth / 2), 0, -Math.floor(WallWidth / 2))
         // build 2 walls from bottom to top (up to WallHeight)
-        for (let posY = 0; posY <= WallHeight - 1; posY++) {
-            alternate = false
-            // add 2 walls
-            // builder.mark()
-            for (let index = 0; index < 2; index++) {
-                putBlock = true
-                if (posY == WallHeight - 1) {
-                    alternate = true
-                }
-                // add a wall
-                for (let index = 0; index < WallLenght - 1; index++) {
-                    if (putBlock) {
-                        builder.place(BlocType)
-                    }
-                    if (alternate) {
-                        putBlock = !(putBlock)
-                    }
-                    builder.move(FORWARD, 1)
-                }
-                // builder.tracePath(BlocType)
-                builder.turn(LEFT_TURN)
-                for (let index = 0; index < WallWidth - 1; index++) {
-                    if (putBlock) {
-                        builder.place(BlocType)
-                    }
-                    if (alternate) {
-                        putBlock = !(putBlock)
-                    }
-                    builder.move(FORWARD, 1)
-                }
-                // builder.tracePath(BlocType)
-                builder.turn(LEFT_TURN)
-            }
+        for (let index = 0; index < WallHeight - 1; index++) {
+            drawRectangle(WallLenght, WallWidth, BlocType)
             builder.move(UP, 1)
         }
+        drawAlternatingRectangle(WallLenght, WallWidth, BlocType)
         // mov builder to center on other wall's end   ( added -1 as hotfix :/ )
-        builder.shift(WallLenght - 1 - WallWidth / 2, 0 - WallHeight, WallWidth / 2 - 1)
+        builder.shift(WallLenght - Math.floor(WallWidth / 2) - 1, 1 - WallHeight, Math.floor(WallWidth / 2))
         // verify it's ok
         builder.place(CYAN_WOOL)
     }
