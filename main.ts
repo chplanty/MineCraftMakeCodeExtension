@@ -107,7 +107,4 @@ namespace castles {
             builder.turn(LEFT_TURN);
         }
     }
-
-    //% block
-    export function foo(blockType:Block){}
 }
