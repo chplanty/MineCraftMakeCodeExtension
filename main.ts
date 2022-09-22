@@ -60,6 +60,9 @@ namespace castles {
     //% blockType.fieldOptions.maxRows="8"
     //% blockType.fieldOptions.hasSearchBar=true
     //% blockType.fieldOptions.hideRect=true
+    //% width.min=1 width.max=1000
+    //% length.min=1 length.max=1000
+    //% height.min=1 height.max=1000
     export function buildCastleWall(width: number = 3, length: number = 27, height: number = 6, blockType: Block = Block.Cobblestone) {
         builder.place(CYAN_STAINED_GLASS)
         builder.shift(-Math.floor(width / 2), 0, -Math.floor(width / 2))
@@ -90,6 +93,8 @@ namespace castles {
     //% blockType.fieldOptions.maxRows="8"
     //% blockType.fieldOptions.hasSearchBar=true
     //% blockType.fieldOptions.hideRect=true
+    //% width.min=1 width.max=1000
+    //% height.min=1 height.max=1000
     export function buildCastleTower(width: number = 5, height: number = 8, blockType: Block = Block.Cobblestone) {
         // builder is at the center of the tower - shift it to a corner
         builder.shift(- Math.floor(width / 2), 0, - Math.floor(width / 2))
