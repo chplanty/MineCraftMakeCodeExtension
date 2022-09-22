@@ -57,6 +57,7 @@ namespace castles {
     //% blockType.fieldEditor="gridpicker"
     //% blockType.fieldOptions.width=340 block.fieldOptions.columns=8 block.fieldOptions.tooltips=true
     //% blockType.fieldOptions.tooltipsXOffset="20" block.fieldOptions.tooltipsYOffset="-20"
+    //% blockType.fieldOptions.columns="8"
     //% blockType.fieldOptions.maxRows="8"
     //% blockType.fieldOptions.hasSearchBar=true
     //% blockType.fieldOptions.hideRect=true
@@ -87,6 +88,7 @@ namespace castles {
     //% blockType.fieldEditor="gridpicker"
     //% blockType.fieldOptions.width=340 block.fieldOptions.columns=8 block.fieldOptions.tooltips=true
     //% blockType.fieldOptions.tooltipsXOffset="20" block.fieldOptions.tooltipsYOffset="-20"
+    //% blockType.fieldOptions.columns="8"
     //% blockType.fieldOptions.maxRows="8"
     //% blockType.fieldOptions.hasSearchBar=true
     //% blockType.fieldOptions.hideRect=true
