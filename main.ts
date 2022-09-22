@@ -63,6 +63,8 @@ namespace castles {
     //% width.min=1 width.max=1000
     //% length.min=1 length.max=1000
     //% height.min=1 height.max=1000
+    //% inlineInputMode="external"
+    //% weight=340
     export function buildCastleWall(width: number = 3, length: number = 27, height: number = 6, blockType: Block = Block.Cobblestone) {
         builder.place(CYAN_STAINED_GLASS)
         builder.shift(-Math.floor(width / 2), 0, -Math.floor(width / 2))
@@ -82,7 +84,7 @@ namespace castles {
      * Build a square tower
      */
 
-    //% block="build castle tower || shape square made of $blockType width $width height $height"
+    //% block="build castle tower || shape square|made of $blockType width $width height $height"
     //% width.defl=5
     //% height.defl=8
     //% blockType.defl=Block.Cobblestone
@@ -95,6 +97,8 @@ namespace castles {
     //% blockType.fieldOptions.hideRect=true
     //% width.min=1 width.max=1000
     //% height.min=1 height.max=1000
+    //% inlineInputMode="external"
+    //% weight=350
     export function buildCastleTower(width: number = 5, height: number = 8, blockType: Block = Block.Cobblestone) {
         // builder is at the center of the tower - shift it to a corner
         builder.shift(- Math.floor(width / 2), 0, - Math.floor(width / 2))
@@ -125,6 +129,7 @@ namespace castles {
      */
 
     //% block="build a simple castle."
+    //% weight=250
     export function buildBasicCastle() {
         let originalPlayerPosition = player.position()
         // move builder back to player position to allow repeat usage
@@ -146,6 +151,7 @@ namespace castles {
      */
 
     //% block="Build a castle in the sky."
+    //% weight=150
     export function buildCastleInTheSky() {
         let originalPlayerPosition = player.position()
         builder.teleportTo(originalPlayerPosition)
@@ -167,7 +173,9 @@ namespace castles {
      * Grow a bean stalk to reach a castle in the sky.
      */
 
-    //% block="Grow a bean stalk to reach a castle in the sky."
+    //% block="Grow a bean stalk| to reach a castle in the sky."
+    //% inlineInputMode="external"
+    //% weight=145
     export function growBeanStalk() {
         blocks.fill(
             GREEN_WOOL,
